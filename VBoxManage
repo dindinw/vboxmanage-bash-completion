@@ -60,7 +60,7 @@ _VBoxManage() {
 
         for item in "${hdds[@]}"
         do
-            [[ ${item^^} == ${cur^^}* ]] && COMPREPLY+=("$item")
+            [[ "${item}" == "${cur}"* ]] && COMPREPLY+=("$item")
         done
     }
 
@@ -78,7 +78,7 @@ _VBoxManage() {
 
         for item in "${floppies[@]}"
         do
-            [[ ${item^^} == ${cur^^}* ]] && COMPREPLY+=("$item")
+            [[ "${item}" == "${cur}"* ]] && COMPREPLY+=("$item")
         done
     }
 
@@ -96,7 +96,7 @@ _VBoxManage() {
 
         for item in "${dvds[@]}"
         do
-            [[ ${item^^} == ${cur^^}* ]] && COMPREPLY+=("$item")
+            [[ "${item}" == "${cur}"* ]] && COMPREPLY+=("$item")
         done
     }
 
@@ -110,7 +110,7 @@ _VBoxManage() {
         local item
 
 
-        compopt -o filenames
+        # compopt -o filenames
         if [[ $# == 2 ]]
         then
             exclude_running=true
@@ -136,7 +136,7 @@ _VBoxManage() {
                 [[ $? == 0 ]] && continue
             fi
 
-            [[ ${item^^} == ${cur^^}* ]] && COMPREPLY+=("$item")
+            [[ ${item} == ${cur}* ]] && COMPREPLY+=("$item")
         done
     }
 
@@ -334,7 +334,7 @@ _VBoxManage() {
 
         for item in "${folders[@]}"
         do
-            [[ ${item^^} == ${cur^^}* ]] && COMPREPLY+=("$item")
+            [[ ${item} == ${cur}* ]] && COMPREPLY+=("$item")
         done
     }
 
@@ -1890,7 +1890,6 @@ _VBoxManage() {
                         _floppy_comp
                         ;;
                     *)
-                        items=(--delete)
                         _get_excluded_items "${items[@]}"
                         COMPREPLY=( $(compgen -W "$result" -- ${cur}) )
                         ;;
@@ -1998,7 +1997,7 @@ _VBoxManage() {
                         _dvds_comp
                         for item in "${tmp[@]}"
                         do
-                            [[ ${item^^} == ${cur^^}* ]] && COMPREPLY+=("$item")
+                            [[ ${item} == ${cur}* ]] && COMPREPLY+=("$item")
                         done
                         ;;
                     --mtype)
